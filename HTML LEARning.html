@@ -1,0 +1,772 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HTML//GENZ</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter,sans-serif;
+    background:#050505;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* SCROLL BAR */
+::-webkit-scrollbar{
+    width:8px;
+}
+::-webkit-scrollbar-track{
+    background:#050505;
+}
+::-webkit-scrollbar-thumb{
+    background:#fff;
+    border-radius:20px;
+}
+
+/* PROGRESS */
+#progress{
+    position:fixed;
+    top:0;
+    left:0;
+    height:4px;
+    width:0%;
+    background:linear-gradient(90deg,#00f5ff,#a855f7,#ff2bd6);
+    z-index:9999;
+}
+
+/* BACKGROUND */
+.bg{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    background:
+        radial-gradient(circle at 15% 20%,rgba(0,245,255,.12),transparent 25%),
+        radial-gradient(circle at 85% 30%,rgba(168,85,247,.14),transparent 25%),
+        radial-gradient(circle at 50% 90%,rgba(255,43,214,.10),transparent 30%);
+}
+
+.grid{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    opacity:.12;
+    background-image:
+        linear-gradient(#fff 1px,transparent 1px),
+        linear-gradient(90deg,#fff 1px,transparent 1px);
+    background-size:50px 50px;
+    mask-image:linear-gradient(to bottom,black,transparent);
+}
+
+/* NAV */
+nav{
+    position:fixed;
+    top:18px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(900px,92%);
+    padding:13px 18px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(10,10,10,.65);
+    backdrop-filter:blur(20px);
+    border-radius:50px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    z-index:1000;
+}
+
+.logo{
+    font-family:"Space Grotesk";
+    font-weight:900;
+    font-size:18px;
+}
+
+.logo span{
+    color:#00f5ff;
+}
+
+nav a{
+    color:#aaa;
+    text-decoration:none;
+    margin-left:18px;
+    font-size:13px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:white;
+}
+
+/* HERO */
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:120px 20px 80px;
+}
+
+.hero-content{
+    max-width:950px;
+}
+
+.badge{
+    display:inline-block;
+    padding:9px 16px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:50px;
+    color:#bbb;
+    background:rgba(255,255,255,.04);
+    margin-bottom:25px;
+    animation:float 3s ease-in-out infinite;
+}
+
+h1{
+    font-family:"Space Grotesk";
+    font-size:clamp(60px,11vw,150px);
+    line-height:.85;
+    letter-spacing:-7px;
+}
+
+.gradient{
+    background:linear-gradient(90deg,#00f5ff,#a855f7,#ff2bd6);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    color:#999;
+    font-size:18px;
+    max-width:600px;
+    margin:35px auto;
+    line-height:1.7;
+}
+
+.cta{
+    display:inline-block;
+    padding:15px 25px;
+    border-radius:50px;
+    background:#fff;
+    color:#000;
+    text-decoration:none;
+    font-weight:800;
+    transition:.3s;
+}
+
+.cta:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 35px rgba(255,255,255,.25);
+}
+
+/* SECTIONS */
+section{
+    padding:130px 7%;
+}
+
+.section-title{
+    font-family:"Space Grotesk";
+    font-size:clamp(40px,7vw,80px);
+    margin-bottom:25px;
+}
+
+.section-sub{
+    color:#888;
+    max-width:650px;
+    line-height:1.7;
+    margin-bottom:55px;
+}
+
+/* POP CARDS */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    padding:30px;
+    min-height:220px;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:25px;
+    background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+    transition:.4s;
+    opacity:0;
+    transform:translateY(70px) scale(.95);
+}
+
+.card.show{
+    opacity:1;
+    transform:translateY(0) scale(1);
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.02);
+    border-color:rgba(0,245,255,.5);
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+
+.number{
+    font-size:12px;
+    color:#00f5ff;
+    font-weight:800;
+    margin-bottom:25px;
+}
+
+.card h3{
+    font-size:27px;
+    margin-bottom:12px;
+}
+
+.card p{
+    color:#888;
+    line-height:1.6;
+}
+
+/* CODE */
+.code-wrap{
+    max-width:1000px;
+    margin:auto;
+}
+
+.code-box{
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:25px;
+    overflow:hidden;
+    background:#090909;
+    box-shadow:0 30px 100px rgba(0,0,0,.5);
+}
+
+.code-top{
+    padding:15px 20px;
+    background:#111;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.dot{
+    width:11px;
+    height:11px;
+    border-radius:50%;
+    background:#444;
+}
+
+.file{
+    margin-left:10px;
+    color:#777;
+    font-size:13px;
+}
+
+pre{
+    padding:30px;
+    overflow:auto;
+    color:#ddd;
+    font-family:monospace;
+    line-height:1.8;
+}
+
+.tag{
+    color:#ff5ccf;
+}
+
+.attr{
+    color:#00f5ff;
+}
+
+.value{
+    color:#a8ff60;
+}
+
+.comment{
+    color:#555;
+}
+
+/* TERMINAL */
+.terminal{
+    margin-top:25px;
+    padding:25px;
+    border-radius:20px;
+    background:#020202;
+    border:1px solid #181818;
+    color:#00ff88;
+    font-family:monospace;
+}
+
+/* PLAYGROUND */
+.playground{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+textarea{
+    width:100%;
+    min-height:350px;
+    background:#090909;
+    border:1px solid #222;
+    color:#fff;
+    border-radius:20px;
+    padding:25px;
+    resize:none;
+    outline:none;
+    font-family:monospace;
+    font-size:15px;
+}
+
+iframe{
+    width:100%;
+    min-height:350px;
+    border:1px solid #222;
+    border-radius:20px;
+    background:white;
+}
+
+/* TIPS */
+.tip{
+    margin-top:25px;
+    padding:25px;
+    border-radius:20px;
+    border:1px solid rgba(168,85,247,.25);
+    background:rgba(168,85,247,.05);
+}
+
+.tip b{
+    color:#c084fc;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:100px 20px;
+    border-top:1px solid #151515;
+}
+
+footer h2{
+    font-family:"Space Grotesk";
+    font-size:50px;
+}
+
+footer p{
+    color:#666;
+    margin-top:15px;
+}
+
+.made{
+    margin-top:45px;
+    color:#888;
+}
+
+.made span{
+    color:white;
+}
+
+/* FLOAT */
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+}
+
+/* MOBILE */
+@media(max-width:700px){
+
+    nav{
+        width:94%;
+    }
+
+    nav div:last-child{
+        display:none;
+    }
+
+    h1{
+        letter-spacing:-4px;
+    }
+
+    section{
+        padding:90px 6%;
+    }
+
+    .playground{
+        grid-template-columns:1fr;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="progress"></div>
+<div class="bg"></div>
+<div class="grid"></div>
+
+<nav>
+    <div class="logo">&lt;<span>HTML</span>/&gt;</div>
+
+    <div>
+        <a href="#learn">Learn</a>
+        <a href="#code">Code</a>
+        <a href="#play">Play</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+<div class="hero-content">
+
+<div class="badge">⚡ HTML, but make it actually interesting</div>
+
+<h1>
+LEARN<br>
+<span class="gradient">HTML.</span>
+</h1>
+
+<p>
+Forget boring tutorials.
+Learn how websites are actually built —
+one tag, one idea and one ridiculously satisfying animation at a time.
+</p>
+
+<a href="#learn" class="cta">START COOKING →</a>
+
+</div>
+
+</section>
+
+
+<!-- WHAT IS HTML -->
+<section id="learn">
+
+<h2 class="section-title reveal">So... what is HTML?</h2>
+
+<p class="section-sub reveal">
+HTML stands for <b>HyperText Markup Language.</b>
+Basically, it tells your browser what exists on a webpage.
+Text? HTML. Image? HTML. Button? HTML. Headings? Yep.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<div class="number">01 / STRUCTURE</div>
+<h3>🧱 The Skeleton</h3>
+<p>
+HTML creates the basic structure of your website.
+Think of it as the skeleton before CSS makes everything look insane.
+</p>
+</div>
+
+<div class="card">
+<div class="number">02 / TAGS</div>
+<h3>🏷️ Tags</h3>
+<p>
+Tags tell the browser what something is.
+Heading, paragraph, image, link, button — each has its own tag.
+</p>
+</div>
+
+<div class="card">
+<div class="number">03 / BROWSER</div>
+<h3>🌐 Browser</h3>
+<p>
+Your browser reads HTML and turns those tags into the webpage
+you're looking at right now.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- TAGS -->
+<section>
+
+<h2 class="section-title reveal">Meet the tags.</h2>
+
+<p class="section-sub reveal">
+HTML is basically a language made from tags.
+Here's the cheat sheet.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<div class="number">&lt;h1&gt;</div>
+<h3>Headings</h3>
+<p>The big boys. Use headings to create titles and sections.</p>
+</div>
+
+<div class="card">
+<div class="number">&lt;p&gt;</div>
+<h3>Paragraph</h3>
+<p>Used whenever you want normal text on your page.</p>
+</div>
+
+<div class="card">
+<div class="number">&lt;a&gt;</div>
+<h3>Links</h3>
+<p>Send users somewhere else using clickable links.</p>
+</div>
+
+<div class="card">
+<div class="number">&lt;img&gt;</div>
+<h3>Images</h3>
+<p>Put images directly onto your webpage.</p>
+</div>
+
+<div class="card">
+<div class="number">&lt;button&gt;</div>
+<h3>Buttons</h3>
+<p>Interactive-looking buttons start with HTML.</p>
+</div>
+
+<div class="card">
+<div class="number">&lt;ul&gt;</div>
+<h3>Lists</h3>
+<p>Create ordered and unordered lists easily.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CODE -->
+<section id="code">
+
+<div class="code-wrap">
+
+<h2 class="section-title reveal">Okay... show me code.</h2>
+
+<p class="section-sub reveal">
+This is literally enough to create your first HTML page.
+No framework. No complicated setup. Just HTML.
+</p>
+
+<div class="code-box reveal">
+
+<div class="code-top">
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="file">index.html</div>
+</div>
+
+<pre>
+<span class="comment">&lt;!-- your first website --&gt;</span>
+
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+
+<span class="tag">&lt;html&gt;</span>
+
+<span class="tag">&lt;body&gt;</span>
+
+    <span class="tag">&lt;h1&gt;</span>
+        Hello, Internet.
+    <span class="tag">&lt;/h1&gt;</span>
+
+    <span class="tag">&lt;p&gt;</span>
+        I just made a website.
+    <span class="tag">&lt;/p&gt;</span>
+
+    <span class="tag">&lt;button&gt;</span>
+        Click me
+    <span class="tag">&lt;/button&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+
+<span class="tag">&lt;/html&gt;</span>
+</pre>
+
+</div>
+
+<div class="terminal">
+&gt; HTML compiled successfully<br>
+&gt; Website.exe has entered the chat 💀
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ATTRIBUTES -->
+<section>
+
+<h2 class="section-title reveal">Tags have stats.</h2>
+
+<p class="section-sub reveal">
+They're called <b>attributes</b>. They give HTML elements extra information.
+</p>
+
+<div class="code-box reveal">
+
+<div class="code-top">
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="file">attributes.html</div>
+</div>
+
+<pre>
+<span class="tag">&lt;a</span>
+    <span class="attr">href</span>=<span class="value">"https://example.com"</span>
+<span class="tag">&gt;</span>
+
+    Visit Website
+
+<span class="tag">&lt;/a&gt;</span>
+
+
+<span class="tag">&lt;img</span>
+    <span class="attr">src</span>=<span class="value">"image.jpg"</span>
+    <span class="attr">alt</span>=<span class="value">"Cool image"</span>
+<span class="tag">&gt;</span>
+</pre>
+
+</div>
+
+<div class="tip">
+<b>💡 Remember:</b> An attribute gives extra information to an HTML element.
+</div>
+
+</section>
+
+
+<!-- PLAYGROUND -->
+<section id="play">
+
+<h2 class="section-title reveal">Now you cook.</h2>
+
+<p class="section-sub reveal">
+Change the HTML on the left. Your website updates instantly on the right.
+</p>
+
+<div class="playground reveal">
+
+<textarea id="editor">
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Hello Arpit 👋</h1>
+
+<p>I am learning HTML!</p>
+
+<button>Click Me</button>
+
+</body>
+</html>
+</textarea>
+
+<iframe id="preview"></iframe>
+
+</div>
+
+</section>
+
+
+<!-- FINAL -->
+<section>
+
+<div style="text-align:center;max-width:800px;margin:auto">
+
+<h2 class="section-title reveal">
+HTML = unlocked 🔓
+</h2>
+
+<p class="section-sub reveal" style="margin-left:auto;margin-right:auto">
+You now know the basic idea behind HTML,
+the most important tags, attributes, and how a browser
+turns your code into an actual webpage.
+</p>
+
+<a href="#" class="cta">BACK TO TOP ↑</a>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<h2>&lt;/HTML&gt;</h2>
+
+<p>Keep coding. Keep breaking things. Keep learning.</p>
+
+<div class="made">
+Made with ⚡ by <span>Arpit & Vaibhav</span>
+</div>
+
+</footer>
+
+
+<script>
+
+/* SCROLL PROGRESS */
+window.addEventListener("scroll",()=>{
+    const scrollTop=window.scrollY;
+    const height=document.body.scrollHeight-window.innerHeight;
+    const progress=(scrollTop/height)*100;
+    document.getElementById("progress").style.width=progress+"%";
+});
+
+
+/* SCROLL REVEAL */
+const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add("show");
+        }
+    });
+},{
+    threshold:.15
+});
+
+document.querySelectorAll(".card,.reveal").forEach(el=>{
+    observer.observe(el);
+});
+
+
+/* STAGGER CARDS */
+document.querySelectorAll(".cards").forEach(group=>{
+    [...group.children].forEach((card,index)=>{
+        card.style.transitionDelay=(index*100)+"ms";
+    });
+});
+
+
+/* LIVE HTML PLAYGROUND */
+const editor=document.getElementById("editor");
+const preview=document.getElementById("preview");
+
+function updatePreview(){
+    preview.srcdoc=editor.value;
+}
+
+editor.addEventListener("input",updatePreview);
+
+updatePreview();
+
+</script>
+
+</body>
+</html>
